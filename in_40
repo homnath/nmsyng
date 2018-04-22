@@ -1,0 +1,7 @@
+/opt/seismo-util/Modes/nmcat/aniprem808.dk
+/opt/seismo-util/Modes/nmcat/toroidal.aniprem808_40s.bin
+/opt/seismo-util/Modes/nmcat/radial.aniprem808_40s.bin
+/opt/seismo-util/Modes/nmcat/spheroidal.aniprem808_40s_all.bin
+CMTSOLUTION_bol
+40.0
+2 3600
