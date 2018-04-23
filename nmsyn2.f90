@@ -1,75 +1,94 @@
-      program spherical
+program spherical
 !
-      implicit none
+implicit none
 !
-      include "spherical.h"
+include "spherical.h"
 !
-      include "minos.h"
+include "minos.h"
 !
-      integer yr,jda,ho,mi
-      integer yr1,jda1,ho1,mi1
-      integer ns,nps,nstn
-      integer i,j,ios,iom
-      integer is,ir
-      integer lnblnk
-      integer n,l,lprev
-      real elat,elon,depth
-      real sphif,sdlt,slnda,moment
-      real mrr,mtt,mpp,mrt,mrp,mtp
-      real radius,rho,vpv,vph,vsv,vsh,eta,qmu,qkappa
-      real r(NL)
-      real rs,ws,dws,us,dus,vs,dvs
-      real w(NL),dw(NL)
-      real u(NL),du(NL),v(NL),dv(NL)
-      real rlat,rlon,stele,stbur,stazi,stdip,spsec,sec1
-      double precision delta,aze,azr
-      double precision k,fac
-      double precision a0,a1,a2,b1,b2
-      double precision a,dadt,dadp
-      double precision amp(3)
-      double precision t0,ts,dt,hdur,reclen
-      double precision theta,phi
-      double precision om,q,av,ah
-      double precision sint,cost,p(3),dp(3)
-      double precision sinp,cosp,sin2p,cos2p
-      double precision T_min,T_max,om_min,om_max
-      double precision seismogram(3,NTMAX)
-      character*4 stn
-      character*2 ntw
-      character*80 cmt_file,station_file
-      character*80 model_file,toroidal_file,radial_file,spheroidal_file
+integer yr,jda,ho,mi
+integer yr1,jda1,ho1,mi1
+integer ns,nps,nstn
+integer i,j,ios,iom
+integer is,ir
+integer lnblnk
+integer n,l,lprev
+real elat,elon,depth
+real sphif,sdlt,slnda,moment
+real mrr,mtt,mpp,mrt,mrp,mtp
+real radius,rho,vpv,vph,vsv,vsh,eta,qmu,qkappa
+real r(NL)
+real rs,ws,dws,us,dus,vs,dvs
+real w(NL),dw(NL)
+real u(NL),du(NL),v(NL),dv(NL)
+real rlat,rlon,stele,stbur,stazi,stdip,spsec,sec1
+double precision delta,aze,azr
+double precision k,fac
+double precision a0,a1,a2,b1,b2
+double precision a,dadt,dadp
+double precision amp(3)
+double precision t0,ts,dt,hdur,reclen
+double precision theta,phi
+double precision om,q,av,ah
+double precision sint,cost,p(3),dp(3)
+double precision sinp,cosp,sin2p,cos2p
+double precision T_min,T_max,om_min,om_max
+double precision seismogram(3,NTMAX)
+character(len=250) :: inp_fname
+character(len=4  ) :: stn
+character(len=2  ) :: ntw
+character(len=80 ) :: cmt_file,station_file
+character(len=80 ) :: model_file,toroidal_file,radial_file,spheroidal_file
+
+! read main input file
+! get input file name
+call get_command_argument(1, inp_fname) 
+
+! open file to read                                                              
+open(unit=11,file=trim(inp_fname),status='old', action='read',iostat=ios)        
+if (ios /= 0)then                                                                
+  write(*,'(a)')'ERROR: input file "'//trim(inp_fname)//&                   
+  '" cannot be opened!'                                                          
+  return                                                                         
+endif  
+!       specify the catalogue information
+
+read(11,'(a)') model_file
+read(11,'(a)') toroidal_file
+read(11,'(a)') radial_file
+read(11,'(a)') spheroidal_file
 
 
 !       specify the catalogue information
 
-      read(*,'(a)') model_file
-      read(*,'(a)') toroidal_file
-      read(*,'(a)') radial_file
-      read(*,'(a)') spheroidal_file
-      print *,' '
-      print *,'          model file: ',model_file(1:lnblnk(model_file))
-      print *,'  toroidal mode file: ',toroidal_file(1:lnblnk(toroidal_file))
-      print *,'    radial mode file: ',radial_file(1:lnblnk(radial_file))
-      print *,'spheroidal mode file: ',spheroidal_file(1:lnblnk(spheroidal_file))
+read(11,'(a)') model_file
+read(11,'(a)') toroidal_file
+read(11,'(a)') radial_file
+read(11,'(a)') spheroidal_file
+print *,' '
+print *,'          model file: ',model_file(1:lnblnk(model_file))
+print *,'  toroidal mode file: ',toroidal_file(1:lnblnk(toroidal_file))
+print *,'    radial mode file: ',radial_file(1:lnblnk(radial_file))
+print *,'spheroidal mode file: ',spheroidal_file(1:lnblnk(spheroidal_file))
 !     specify the earthquake location (elat,elon,depth)
 !     specify the dip and azimuth of the fault plane and rake of slip
 !             and derive the moment tensor (sdlt,slnda,sphif -> Mii)
 !             (hiroo class notes)
 !     specify the half duration(hdur)
-      read(*,*) elat,elon,depth
-      read(*,*) sphif,sdlt,slnda,moment
+      read(11,*) elat,elon,depth
+      read(11,*) sphif,sdlt,slnda,moment
       moment = moment/1e30
       call adr2cmt(sphif,sdlt,slnda,moment,mrr,mtt,mpp,mrt,mrp,mtp)
       print *,' '
       print *,' scaled moment tensor:', mrr,mtt,mpp
       print *,'                      ', mrt,mrp,mtp
 !
-      read(*,*) hdur
+      read(11,*) hdur
 
 
 !       specify the shortest period in mode summation
 
-      read(*,*) T_min
+      read(11,*) T_min
       T_max=6000.0d0
       om_max=PI2/T_min
       om_min=PI2/T_max
@@ -78,7 +97,8 @@
 
 !       specify sampliing rate and length of the record in seconds
 
-      read(*,*) dt,reclen
+      read(11,*) dt,reclen
+      close(11)
       if (2*dt > T_min) stop ' Sampling rate too large'
       nps=int(reclen/dt) 
       t0=0.0
@@ -91,7 +111,7 @@
 !       get the radii for the upper NL layers at which the eigenfunctions
 !       are stored; needed for source radius
 
-      open(unit=1,file=model_file)
+      open(unit=1,file=trim(model_file))
       rewind(1)
       j=0
       do i=1,NR
@@ -119,7 +139,7 @@
 !
       
        station_file='STATIONS'
-       open(unit=1,file=station_file,status='old',iostat=ios)
+       open(unit=1,file=trim(station_file),status='old',iostat=ios)
        if (ios.ne.0) stop 'Error opening station file STATIONS'
        read(1,*,iostat=ios) nstn
        print *,' '
@@ -169,7 +189,7 @@
 !
 !           start toroidal mode sum
 !
-          open(unit=2,file=toroidal_file,status='old',form='unformatted')
+          open(unit=2,file=trim(toroidal_file),status='old',form='unformatted')
           rewind(2)
           iom=0
           lprev=0
@@ -224,7 +244,7 @@
 !
 !           start radial mode sum
 !
-          open(unit=2,file=radial_file,status='old',form='unformatted')
+          open(unit=2,file=trim(radial_file),status='old',form='unformatted')
           rewind(2)
           iom=0
           do while(iom.eq.0)
@@ -270,7 +290,7 @@
 !
 !           start spheroidal mode sum
 !
-          open(unit=2,file=spheroidal_file,status='old',form='unformatted')
+          open(unit=2,file=trim(spheroidal_file),status='old',form='unformatted')
           rewind(2)
           iom=0
           lprev=0
