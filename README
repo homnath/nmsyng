@@ -18,7 +18,7 @@ and spheroidal catalogue, CMTSOLUTION file name, shortest period
 in summation, dt in output time series, and total length of record in 
 seconds.
 
-example execution: xnmsyn < in_8
+example execution: xnmsyn in_8
 
 2. SETUP
 
