@@ -1,4 +1,8 @@
 Originally Developed by: Jeroen Tromp
+Modified by:
+Qinya  lqy@gps.caltech.edu
+03/21/02
+Hom Nath Gharti
 
 xnmsyn calculates a normal mode synthetics using normal mode
 summation for given CMTSOLUTION and STATIONS files.
@@ -6,24 +10,26 @@ summation for given CMTSOLUTION and STATIONS files.
 1. INPUT PARAMTERS:
 
 EXAMPLE--- 
-/home/lqy/catalogue/data/aniprem808.dk
-/home/lqy/catalogue/data/toroidal.aniprem808.bin
-/home/lqy/catalogue/data/radial.aniprem808.bin
-/home/lqy/catalogue/data/spheroidal.aniprem808.bin
-CMTSOLUTION
-8.0
-1 3600
+
+./database/prem_noocean_model
+./database/toroidal_prem_noocean.bin
+./database/radial_prem_noocean.bin
+./database/spheroidal_prem_noocean.bin
+./input/CMTSOLUTION
+./input/STATIONS
+17.0
+1 12000
 
 are respectively: model deck file, toroidal catalogue, radial catalogue,
-and spheroidal catalogue, CMTSOLUTION file name, shortest period 
+and spheroidal catalogue, CMTSOLUTION file name, STATIONS file name, shortest period 
 in summation, dt in output time series, and total length of record in 
 seconds.
 
-example execution: xnmsyn in_8
+example execution: xnmsyn input/prem_noocean.in
 
 2. SETUP
 
-  Make sure you have STATIONS and SYNT/ in the current directory.
+  Make sure you have output/ folder in the current directory.
 
 file STATIONS has the format of
 
@@ -53,7 +59,7 @@ Mtp:      -0.248000E+28
 
 3. OUTPUT 
 
-OUTPUT will be in SYNT/ with names like:
+OUTPUT will be in output/ with names like:
 PAS.TS.LHE.nmsyn  PAS.TS.LHN.nmsyn  PAS.TS.LHZ.nmsyn
 and the old version of synthetics with the same name will
 be overwritten, so be sure to rename the old ones if they
@@ -112,5 +118,3 @@ in faster computation.
 input and output format.
 
 
-Qinya  lqy@gps.caltech.edu
-03/21/02
