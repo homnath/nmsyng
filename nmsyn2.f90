@@ -51,13 +51,6 @@ if (ios /= 0)then
   '" cannot be opened!'                                                          
   return                                                                         
 endif  
-!       specify the catalogue information
-
-read(11,'(a)') model_file
-read(11,'(a)') toroidal_file
-read(11,'(a)') radial_file
-read(11,'(a)') spheroidal_file
-
 
 !       specify the catalogue information
 
@@ -70,21 +63,21 @@ print *,'          model file: ',model_file(1:lnblnk(model_file))
 print *,'  toroidal mode file: ',toroidal_file(1:lnblnk(toroidal_file))
 print *,'    radial mode file: ',radial_file(1:lnblnk(radial_file))
 print *,'spheroidal mode file: ',spheroidal_file(1:lnblnk(spheroidal_file))
-!     specify the earthquake location (elat,elon,depth)
-!     specify the dip and azimuth of the fault plane and rake of slip
-!             and derive the moment tensor (sdlt,slnda,sphif -> Mii)
-!             (hiroo class notes)
-!     specify the half duration(hdur)
-read(11,*) elat,elon,depth
-read(11,*) sphif,sdlt,slnda,moment
-moment = moment/1e30
-call adr2cmt(sphif,sdlt,slnda,moment,mrr,mtt,mpp,mrt,mrp,mtp)
-print *,' '
-print *,' scaled moment tensor:', mrr,mtt,mpp
-print *,'                      ', mrt,mrp,mtp
-!
-read(11,*) hdur
 
+
+!       specify cmtsolution file name
+
+read(11,'(a)') cmt_file
+print *,' '
+print *,'    CMTSOLUTION file: ',cmt_file(1:lnblnk(cmt_file))
+call get_cmt(cmt_file,yr,jda,ho,mi,sec,t_cmt,hdr,elat,elon,depth,mrr,mtt, &
+mpp,mrt,mrp,mtp)
+
+hdur=dble(hdr)
+
+read(11,'(a)') station_file
+print *,' '
+print *,'    STATION file: ',station_file(1:lnblnk(station_file))
 
 !       specify the shortest period in mode summation
 
@@ -138,7 +131,6 @@ if(is.lt.1) call exit(1)
 !       read the station information and loop over stations
 !
       
-station_file='STATIONS'
 open(unit=1,file=trim(station_file),status='old',iostat=ios)
 if (ios.ne.0) stop 'Error opening station file STATIONS'
 read(1,*,iostat=ios) nstn

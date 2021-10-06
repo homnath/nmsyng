@@ -23,7 +23,7 @@
 !
       call rotate(elat,elon,rlat,rlon,rot1,rot2)
 !
-      outdir='SYNT'
+      outdir='output'
       loutdir=lnblnk(outdir)
 !
       chn='LHZ'

@@ -1,7 +1,8 @@
-../mineosg/output/prem_noocean_model
-../mineosg/output/toroidal_prem_noocean.bin
-../mineosg/output/radial_prem_noocean.bin
-../mineosg/output/spheroidal_prem_noocean.bin
-CMTSOLUTION
+./database/prem_noocean_model
+./database/toroidal_prem_noocean.bin
+./database/radial_prem_noocean.bin
+./database/spheroidal_prem_noocean.bin
+./input/CMTSOLUTION
+./input/STATIONS
 17.0
 1 12000

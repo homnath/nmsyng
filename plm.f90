@@ -24,12 +24,12 @@ cot=ct/st
 if(l.gt.2) go to 20
 go to(22,23,24),lp1
 22 z(1)=fct
-go to 27
+return
 23 z(1)=ct
 zp(1)=-st
 z(2)=-zp(1)
 zp(2)=0.5d0*z(1)*fl3
-if(l.eq.1) go to 27
+if(l.eq.1)return
 24 zz1=1.
 zz2=ct
 20 z3=((2.0d0*zl-1.0d0)*ct*zz2-(zl-1.0d0)*zz1)/zl
@@ -43,15 +43,15 @@ zp(2)=-cot*z2+fl3*z3
 z(2)=z2
 z2=-z2
 z1=z3
-do 25 i=3,mp1
+do i=3,mp1
   zm=i-1
   ! z3=2.0d0*zm*cot*z2-(zl-zm+1.0d0)*(zl+zm)*z1
   z3=-(2.0d0*(zm-1.0d0)*cot*z2+(zl-zm+2.0d0)*(zl+zm-1.0d0)*z1)
   z(i)=z3
   zp(i)=-((zl+zm)*(zl-zm+1.)*z2+zm*cot*z3)
   z1=z2
-  25 z2=z3
-27 continue
+  z2=z3
+  end do
 return
 end subroutine plm
 !=================================================================

@@ -1,7 +1,8 @@
-/data1/hgharti2/modes/mineosg/output/prem_noocean_ani_pol_model
-/data1/hgharti2/modes/mineosg/output/toroidal_prem_noocean_ani_pol.bin
-/data1/hgharti2/modes/mineosg/output/radial_prem_noocean_ani_pol.bin
-/data1/hgharti2/modes/mineosg/output/spheroidal_prem_noocean_ani_pol.bin
-CMTSOLUTION
+./database/prem_noocean_ani_pol_model
+./database/toroidal_prem_noocean_ani_pol.bin
+./database/radial_prem_noocean_ani_pol.bin
+./database/spheroidal_prem_noocean_ani_pol.bin
+./inputCMTSOLUTION
+./input/STATIONS
 17.0
 1 3600

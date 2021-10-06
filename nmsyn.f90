@@ -73,6 +73,9 @@ mpp,mrt,mrp,mtp)
 
 hdur=dble(hdr)
 
+read(11,'(a)') station_file
+print *,' '
+print *,'    STATION file: ',station_file(1:lnblnk(station_file))
 !       specify the shortest period in mode summation
 
 read(11,*) T_min
@@ -130,7 +133,6 @@ if(is.lt.1) call exit(1)
 !       read the station information and loop over stations
 !
       
-station_file='STATIONS'
 open(unit=1,file=trim(station_file),status='old',iostat=ios)
 if (ios.ne.0) stop 'Error opening station file STATIONS'
 read(1,*,iostat=ios) nstn
