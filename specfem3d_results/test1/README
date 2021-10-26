@@ -1,0 +1,19 @@
+NEX = 128
+model: 1D_isotropic_prem
+   no oceans
+   no ellipticity
+   no surface topography
+   incorporating self-gravitation (Cowling approximation)
+   incorporating full self-gravitation (NO Cowling approximation) with transitio
+ n layer
+   no rotation
+   incorporating attenuation using            3  standard linear solids
+   using 3D attenuation
+ 
+   no 3-D lateral variations
+   no heterogeneities in the mantle
+   no crustal variations
+   using unmodified 1D crustal model with two layers
+   no transverse isotropy
+   no inner-core anisotropy
+   no general mantle anisotropy
