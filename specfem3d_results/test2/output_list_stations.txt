@@ -1,0 +1,25 @@
+ 
+ total number of stations:           22
+ 
+ X1.Y5 epicentral distance    127.3340      deg
+ X11.Y5 epicentral distance    135.0876      deg
+ X21.Y5 epicentral distance    142.0043      deg
+ X31.Y5 epicentral distance    147.5264      deg
+ X41.Y5 epicentral distance    150.8484      deg
+ X51.Y5 epicentral distance    151.2108      deg
+ X61.Y5 epicentral distance    148.5303      deg
+ X71.Y5 epicentral distance    143.4909      deg
+ X81.Y5 epicentral distance    136.9302      deg
+ X91.Y5 epicentral distance    129.4514      deg
+ X101.Y5 epicentral distance    121.4175      deg
+ X111.Y5 epicentral distance    113.0403      deg
+ X121.Y5 epicentral distance    104.4487      deg
+ X131.Y5 epicentral distance    95.72923      deg
+ X141.Y5 epicentral distance    86.94887      deg
+ X151.Y5 epicentral distance    78.17011      deg
+ X161.Y5 epicentral distance    69.46292      deg
+ X171.Y5 epicentral distance    60.91791      deg
+ X181.Y5 epicentral distance    52.66603      deg
+ LIGO.HN epicentral distance    68.52940      deg
+ LIGO.LV epicentral distance    95.62322      deg
+ PRNC.GY epicentral distance    95.14698      deg
