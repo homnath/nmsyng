@@ -1,0 +1,6 @@
+input/prem_noocean.txt
+output/spheroidal_prem_noocean
+output/spheroidal_prem_noocean.bin
+1.0d-10 25.0
+3
+1 2500 0.05 60.0 0 2000

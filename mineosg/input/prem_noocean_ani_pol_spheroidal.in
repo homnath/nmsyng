@@ -1,0 +1,6 @@
+input/prem_noocean_ani_pol.txt
+output/spheroidal_prem_noocean_ani_pol
+output/spheroidal_prem_noocean_ani_pol.bin
+1.0d-10 25.0
+3
+1 2500 0.05 50.0 0 2000

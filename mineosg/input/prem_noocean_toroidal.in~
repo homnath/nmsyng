@@ -1,0 +1,6 @@
+input/prem_noocean.txt
+output/toroidal_prem_noocean
+output/toroidal_prem_noocean.bin
+1.0d-10 25.0
+2
+1 250 0.05 25.0 0

@@ -1,0 +1,6 @@
+input/prem_noocean_iso_pol.txt
+output/radial_prem_noocean_iso_pol
+output/radial_prem_noocean_iso_pol.bin
+1.0d-10 25.0
+1
+0 0 0.05 60.0 0 200
