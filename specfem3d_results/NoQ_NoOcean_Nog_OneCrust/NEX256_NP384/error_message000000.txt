@@ -1,0 +1,2 @@
+ wrong doubling flag for inner core point in model_prem_iso()
+ Error detected, aborting MPI... proc            0
