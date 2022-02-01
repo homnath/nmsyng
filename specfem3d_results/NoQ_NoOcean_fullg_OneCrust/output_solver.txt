@@ -1,0 +1,786 @@
+ 
+ ******************************
+ **** Specfem3D MPI Solver ****
+ ******************************
+ 
+ 
+ Fixing slow underflow trapping problem using small initial field
+ 
+ There are          726  MPI processes
+ Processes are numbered from 0 to          725
+ 
+ There are          176  elements along xi in each chunk
+ There are          176  elements along eta in each chunk
+ 
+ There are           11  slices along xi in each chunk
+ There are           11  slices along eta in each chunk
+ There is a total of          121  slices in each chunk
+ There are            6  chunks
+ There is a total of          726  slices in all the chunks
+ 
+ NDIM =            3
+ 
+ NGLLX =            5
+ NGLLY =            5
+ NGLLZ =            5
+ 
+ using double precision for the calculations
+ 
+ smallest and largest possible floating-point numbers are: 
+  2.225073858507201E-308  1.797693134862316E+308
+ 
+ model: 1D_isotropic_prem_onecrust
+   no oceans
+   no ellipticity
+   no surface topography
+   incorporating self-gravitation (Cowling approximation)
+   incorporating full self-gravitation (NO Cowling approximation) with transitio
+ n layer
+   no rotation
+   no attenuation
+ 
+   no 3-D lateral variations
+   no heterogeneities in the mantle
+   no crustal variations
+   using one layer only in PREM crust
+   no transverse isotropy
+   no inner-core anisotropy
+   no general mantle anisotropy
+ 
+ 
+ Spatial distribution of the slices
+                      120  109   98   87   76   65   54   43   32   21   10
+                      119  108   97   86   75   64   53   42   31   20    9
+                      118  107   96   85   74   63   52   41   30   19    8
+                      117  106   95   84   73   62   51   40   29   18    7
+                      116  105   94   83   72   61   50   39   28   17    6
+                      115  104   93   82   71   60   49   38   27   16    5
+                      114  103   92   81   70   59   48   37   26   15    4
+                      113  102   91   80   69   58   47   36   25   14    3
+                      112  101   90   79   68   57   46   35   24   13    2
+                      111  100   89   78   67   56   45   34   23   12    1
+                      110   99   88   77   66   55   44   33   22   11    0
+  
+   362  351  340  329  318  307  296  285  274  263  252     241  230  219  208  197  186  175  164  153  142  131     604  593  582  571  560  549  538  527  516  505  494
+   361  350  339  328  317  306  295  284  273  262  251     240  229  218  207  196  185  174  163  152  141  130     603  592  581  570  559  548  537  526  515  504  493
+   360  349  338  327  316  305  294  283  272  261  250     239  228  217  206  195  184  173  162  151  140  129     602  591  580  569  558  547  536  525  514  503  492
+   359  348  337  326  315  304  293  282  271  260  249     238  227  216  205  194  183  172  161  150  139  128     601  590  579  568  557  546  535  524  513  502  491
+   358  347  336  325  314  303  292  281  270  259  248     237  226  215  204  193  182  171  160  149  138  127     600  589  578  567  556  545  534  523  512  501  490
+   357  346  335  324  313  302  291  280  269  258  247     236  225  214  203  192  181  170  159  148  137  126     599  588  577  566  555  544  533  522  511  500  489
+   356  345  334  323  312  301  290  279  268  257  246     235  224  213  202  191  180  169  158  147  136  125     598  587  576  565  554  543  532  521  510  499  488
+   355  344  333  322  311  300  289  278  267  256  245     234  223  212  201  190  179  168  157  146  135  124     597  586  575  564  553  542  531  520  509  498  487
+   354  343  332  321  310  299  288  277  266  255  244     233  222  211  200  189  178  167  156  145  134  123     596  585  574  563  552  541  530  519  508  497  486
+   353  342  331  320  309  298  287  276  265  254  243     232  221  210  199  188  177  166  155  144  133  122     595  584  573  562  551  540  529  518  507  496  485
+   352  341  330  319  308  297  286  275  264  253  242     231  220  209  198  187  176  165  154  143  132  121     594  583  572  561  550  539  528  517  506  495  484
+  
+                      725  714  703  692  681  670  659  648  637  626  615
+                      724  713  702  691  680  669  658  647  636  625  614
+                      723  712  701  690  679  668  657  646  635  624  613
+                      722  711  700  689  678  667  656  645  634  623  612
+                      721  710  699  688  677  666  655  644  633  622  611
+                      720  709  698  687  676  665  654  643  632  621  610
+                      719  708  697  686  675  664  653  642  631  620  609
+                      718  707  696  685  674  663  652  641  630  619  608
+                      717  706  695  684  673  662  651  640  629  618  607
+                      716  705  694  683  672  661  650  639  628  617  606
+                      715  704  693  682  671  660  649  638  627  616  605
+  
+                      483  472  461  450  439  428  417  406  395  384  373
+                      482  471  460  449  438  427  416  405  394  383  372
+                      481  470  459  448  437  426  415  404  393  382  371
+                      480  469  458  447  436  425  414  403  392  381  370
+                      479  468  457  446  435  424  413  402  391  380  369
+                      478  467  456  445  434  423  412  401  390  379  368
+                      477  466  455  444  433  422  411  400  389  378  367
+                      476  465  454  443  432  421  410  399  388  377  366
+                      475  464  453  442  431  420  409  398  387  376  365
+                      474  463  452  441  430  419  408  397  386  375  364
+                      473  462  451  440  429  418  407  396  385  374  363
+  
+ for overlapping of communications with calculations:
+ 
+ percentage of edge elements in crust/mantle    42.01389     %
+ percentage of volume elements in crust/mantle    57.98611     %
+ 
+ percentage of edge elements in outer core    81.66666     %
+ percentage of volume elements in outer core    18.33334     %
+ 
+ percentage of edge elements in inner core    60.00000     %
+ percentage of volume elements in inner core    40.00000     %
+ 
+ percentage of edge elements in trinfinite layer    100.0000     %
+ percentage of volume elements in trinfinite layer   0.0000000E+00 %
+ 
+ percentage of edge elements in infinite layer    100.0000     %
+ percentage of volume elements in infinite layer   0.0000000E+00 %
+ 
+ 
+ Elapsed time for reading mesh in seconds =    2.263722    
+ 
+ 
+ *************************************
+  locating source            1
+ *************************************
+ 
+ source located in slice          146
+                in element         1646
+ 
+    xi coordinate of source in that element:  -2.038967551169117E-002
+   eta coordinate of source in that element:   0.511115407936333     
+ gamma coordinate of source in that element:  -0.345715183931841     
+ 
+ Source time function is a Heaviside, convolve later
+ 
+ 
+  half duration:    1.06875000000000       seconds
+     time shift:   0.000000000000000E+000  seconds
+ 
+ original (requested) position of the source:
+ 
+       latitude:   -13.8200000000000     
+      longitude:   -67.2500000000000     
+          depth:    647.100000000000       km
+ 
+ position of the source that will be used:
+ 
+       latitude:   -13.8201392726270     
+      longitude:   -67.2500000000000     
+          depth:    647.099999999999       km
+ 
+ error in location of the source:   1.7683077E-13  km
+ 
+ maximum error in location of the sources:   1.7683077E-13  km
+ 
+ 
+ Elapsed time for detection of sources in seconds =   5.475795269012451E-002
+ 
+ End of source detection - done
+ 
+ 
+ printing the source-time function
+ 
+ printing the source spectrum
+ 
+ Total number of receivers =           22
+ 
+ 
+ ********************
+  locating receivers
+ ********************
+ 
+ 
+ ****************************
+ reading receiver information
+ ****************************
+ 
+ Station #           1 : X1.Y5    epicentral distance:     76.26914      degrees
+ Station #           2 : X11.Y5    epicentral distance:     72.58041      degree
+ s
+ Station #           3 : X21.Y5    epicentral distance:     69.38307      degree
+ s
+ Station #           4 : X31.Y5    epicentral distance:     66.79688      degree
+ s
+ Station #           5 : X41.Y5    epicentral distance:     64.92879      degree
+ s
+ Station #           6 : X51.Y5    epicentral distance:     63.86168      degree
+ s
+ Station #           7 : X61.Y5    epicentral distance:     63.64333      degree
+ s
+ Station #           8 : X71.Y5    epicentral distance:     64.27948      degree
+ s
+ Station #           9 : X81.Y5    epicentral distance:     65.73383      degree
+ s
+ Station #          10 : X91.Y5    epicentral distance:     67.93493      degree
+ s
+ Station #          11 : X101.Y5    epicentral distance:     70.78721     
+  degrees
+ Station #          12 : X111.Y5    epicentral distance:     74.18219     
+  degrees
+ Station #          13 : X121.Y5    epicentral distance:     78.00696     
+  degrees
+ Station #          14 : X131.Y5    epicentral distance:     82.14889     
+  degrees
+ Station #          15 : X141.Y5    epicentral distance:     86.49711     
+  degrees
+ Station #          16 : X151.Y5    epicentral distance:     90.94174     
+  degrees
+ Station #          17 : X161.Y5    epicentral distance:     95.37203     
+  degrees
+ Station #          18 : X171.Y5    epicentral distance:     99.67435     
+  degrees
+ Station #          19 : X181.Y5    epicentral distance:     103.7309     
+  degrees
+ Station #          20 : LIGO.HN    epicentral distance:     76.08275     
+  degrees
+ Station #          21 : LIGO.LV    epicentral distance:     49.59536     
+  degrees
+ Station #          22 : PRNC.GY    epicentral distance:     54.32447     
+  degrees
+ 
+ maximum error in location of all the receivers:   1.5817769E-12  km
+ 
+ Elapsed time for receiver detection in seconds =   3.140339814126492E-002
+ 
+ End of receiver detection - done
+ 
+ 
+ found a total of           22  receivers in all slices
+ this total is okay
+ 
+ Total number of samples for seismograms =        84400
+ 
+ 
+ Reference radius of the Earth used is    6371.00000000000       km
+ 
+ 
+ no oceans
+ 
+ no ellipticity
+ 
+ no surface topography
+ 
+ incorporating self-gravitation (Cowling approximation)
+ 
+ no rotation
+ 
+ no attenuation
+ 
+ 
+ 
+ preparing mass matrices.
+ 
+ preparing mass matrices.
+ 
+ preparing sparse matrix.
+ 
+ preparing constants.
+ 
+ preparing gravity arrays.
+ 
+ initializing wavefields.
+ 
+ 
+ Elapsed time for preparing timerun in seconds =    9.700561    
+ 
+ time loop:
+ 
+            time step:   0.2137500      s
+ number of time steps:        84400
+ total simulated time:    300.6447      minutes
+ start time          :  -1.603125      seconds
+ 
+ 
+ Starting time iteration loop...
+ 
+ Time step #            5
+ Time:  -1.2468750E-02  minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+  8.024117056612735E-004
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  0.000000000000000E+000
+ Elapsed time in seconds =    76.8889351431280     
+ Elapsed time in hh:mm:ss =    0 h 01 m 16 s
+ Mean elapsed time per time step in seconds =    15.3777870286256     
+ Time steps done =            5  out of        84400
+ Time steps remaining =        84395
+ Estimated remaining time in seconds =    1297808.33628086     
+ Estimated remaining time in hh:mm:ss =  360 h 30 m 08 s
+ Estimated total run time in seconds =    1297885.22521600     
+ Estimated total run time in hh:mm:ss =  360 h 31 m 25 s
+ We have done   5.9241708E-03 % of that
+ The run will finish approximately on (in local time): Mon Feb 14, 2022 18:28
+ ************************************************************
+ **** BEWARE: the above time estimates are not reliable
+ **** because fewer than 100 iterations have been performed
+ ************************************************************
+ 
+ Time step #         1000
+ Time:    3.532219      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90519884781547     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  2.429467252759561E-012
+ Elapsed time in seconds =    8104.41166030895     
+ Elapsed time in hh:mm:ss =    2 h 15 m 04 s
+ Mean elapsed time per time step in seconds =    8.10441166030895     
+ Time steps done =         1000  out of        84400
+ Time steps remaining =        83400
+ Estimated remaining time in seconds =    675907.932469766     
+ Estimated remaining time in hh:mm:ss =  187 h 45 m 07 s
+ Estimated total run time in seconds =    684012.344130075     
+ Estimated total run time in hh:mm:ss =  190 h 00 m 12 s
+ We have done    1.184834     % of that
+ The run will finish approximately on (in local time): Mon Feb 07, 2022 15:58
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took    4.95374730322510      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took    2.06778243463486      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took    2.21439809631556      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.562412348575890      
+  seconds
+ 
+ 
+  Total number of time steps written:         1000
+ 
+ Time step #         2000
+ Time:    7.094719      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.91156724857640     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  1.422708572075242E-011
+ Elapsed time in seconds =    16954.1162695102     
+ Elapsed time in hh:mm:ss =    4 h 42 m 34 s
+ Mean elapsed time per time step in seconds =    8.47705813475512     
+ Time steps done =         2000  out of        84400
+ Time steps remaining =        82400
+ Estimated remaining time in seconds =    698509.590303822     
+ Estimated remaining time in hh:mm:ss =  194 h 01 m 49 s
+ Estimated total run time in seconds =    715463.706573332     
+ Estimated total run time in hh:mm:ss =  198 h 44 m 23 s
+ We have done    2.369668     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 00:42
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.346679333597422      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.343989726155996      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.343735775910318      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.115662795491517      
+  seconds
+ 
+ 
+  Total number of time steps written:         2000
+ 
+ Time step #         3000
+ Time:    10.65722      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90585611333492     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  9.008578811366617E-012
+ Elapsed time in seconds =    25553.1581832077     
+ Elapsed time in hh:mm:ss =    7 h 05 m 53 s
+ Mean elapsed time per time step in seconds =    8.51771939440258     
+ Time steps done =         3000  out of        84400
+ Time steps remaining =        81400
+ Estimated remaining time in seconds =    693342.358704370     
+ Estimated remaining time in hh:mm:ss =  192 h 35 m 42 s
+ Estimated total run time in seconds =    718895.516887578     
+ Estimated total run time in hh:mm:ss =  199 h 41 m 35 s
+ We have done    3.554502     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 01:40
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took    1.27605893090367      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.516367385163903      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.509088646620512      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.170001107268035      
+  seconds
+ 
+ 
+  Total number of time steps written:         3000
+ 
+ Time step #         4000
+ Time:    14.21972      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90935303784338     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  9.348603256759460E-012
+ Elapsed time in seconds =    34216.7864776058     
+ Elapsed time in hh:mm:ss =    9 h 30 m 16 s
+ Mean elapsed time per time step in seconds =    8.55419661940145     
+ Time steps done =         4000  out of        84400
+ Time steps remaining =        80400
+ Estimated remaining time in seconds =    687757.408199877     
+ Estimated remaining time in hh:mm:ss =  191 h 02 m 37 s
+ Estimated total run time in seconds =    721974.194677483     
+ Estimated total run time in hh:mm:ss =  200 h 32 m 54 s
+ We have done    4.739336     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 02:32
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.376969549804926      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.350033467635512      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.348439301364124      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.115914141759276      
+  seconds
+ 
+ 
+  Total number of time steps written:         4000
+ 
+ Time step #         5000
+ Time:    17.78222      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90613860516893     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  1.027538849605976E-011
+ Elapsed time in seconds =    42359.2017617635     
+ Elapsed time in hh:mm:ss =   11 h 45 m 59 s
+ Mean elapsed time per time step in seconds =    8.47184035235271     
+ Time steps done =         5000  out of        84400
+ Time steps remaining =        79400
+ Estimated remaining time in seconds =    672664.123976805     
+ Estimated remaining time in hh:mm:ss =  186 h 51 m 04 s
+ Estimated total run time in seconds =    715023.325738569     
+ Estimated total run time in hh:mm:ss =  198 h 37 m 03 s
+ We have done    5.924170     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 00:36
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.440554406493902      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.442930812016129      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.439743245020509      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.145621417090297      
+  seconds
+ 
+ 
+  Total number of time steps written:         5000
+ 
+ Time step #         6000
+ Time:    21.34472      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90806775245355     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  9.747044706393715E-012
+ Elapsed time in seconds =    51037.5565377790     
+ Elapsed time in hh:mm:ss =   14 h 10 m 37 s
+ Mean elapsed time per time step in seconds =    8.50625942296317     
+ Time steps done =         6000  out of        84400
+ Time steps remaining =        78400
+ Estimated remaining time in seconds =    666890.738760313     
+ Estimated remaining time in hh:mm:ss =  185 h 14 m 50 s
+ Estimated total run time in seconds =    717928.295298092     
+ Estimated total run time in hh:mm:ss =  199 h 25 m 28 s
+ We have done    7.109005     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 01:25
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.505991022102535      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.492448655888438      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.496096431277692      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.163974704220891      
+  seconds
+ 
+ 
+  Total number of time steps written:         6000
+ 
+ Time step #         7000
+ Time:    24.90722      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90834526059976     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  8.888885840605494E-012
+ Elapsed time in seconds =    59383.2461578753     
+ Elapsed time in hh:mm:ss =   16 h 29 m 43 s
+ Mean elapsed time per time step in seconds =    8.48332087969647     
+ Time steps done =         7000  out of        84400
+ Time steps remaining =        77400
+ Estimated remaining time in seconds =    656609.036088507     
+ Estimated remaining time in hh:mm:ss =  182 h 23 m 29 s
+ Estimated total run time in seconds =    715992.282246382     
+ Estimated total run time in hh:mm:ss =  198 h 53 m 12 s
+ We have done    8.293839     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 00:52
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.352278076112270      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.350120040588081      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.350021081976593      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.116791531443596      
+  seconds
+ 
+ 
+  Total number of time steps written:         7000
+ 
+ Time step #         8000
+ Time:    28.46972      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90596151120342     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  9.694222414769640E-012
+ Elapsed time in seconds =    67697.4246909730     
+ Elapsed time in hh:mm:ss =   18 h 48 m 17 s
+ Mean elapsed time per time step in seconds =    8.46217808637163     
+ Time steps done =         8000  out of        84400
+ Time steps remaining =        76400
+ Estimated remaining time in seconds =    646510.405798792     
+ Estimated remaining time in hh:mm:ss =  179 h 35 m 10 s
+ Estimated total run time in seconds =    714207.830489765     
+ Estimated total run time in hh:mm:ss =  198 h 23 m 27 s
+ We have done    9.478673     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 00:23
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took    1.07083278987557      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.685518019832671      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.530445789918303      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.177061940543354      
+  seconds
+ 
+ 
+  Total number of time steps written:         8000
+ 
+ Time step #         9000
+ Time:    32.03222      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90429530419566     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  9.200089811274694E-012
+ Elapsed time in seconds =    76202.8147496516     
+ Elapsed time in hh:mm:ss =   21 h 10 m 02 s
+ Mean elapsed time per time step in seconds =    8.46697941662795     
+ Time steps done =         9000  out of        84400
+ Time steps remaining =        75400
+ Estimated remaining time in seconds =    638410.248013748     
+ Estimated remaining time in hh:mm:ss =  177 h 20 m 10 s
+ Estimated total run time in seconds =    714613.062763399     
+ Estimated total run time in hh:mm:ss =  198 h 30 m 13 s
+ We have done    10.66351     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 00:30
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.351474637165666      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.350020178593695      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.350163239054382      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.116574157960713      
+  seconds
+ 
+ 
+  Total number of time steps written:         9000
+ 
+ Time step #        10000
+ Time:    35.59472      minutes
+ Max norm displacement vector U in solid in all slices (m) = 
+   2.90604142209528     
+ Max non-dimensional potential Ufluid in fluid in all slices = 
+  1.084154070388911E-011
+ Elapsed time in seconds =    85055.7629546924     
+ Elapsed time in hh:mm:ss =   23 h 37 m 35 s
+ Mean elapsed time per time step in seconds =    8.50557629546924     
+ Time steps done =        10000  out of        84400
+ Time steps remaining =        74400
+ Estimated remaining time in seconds =    632814.876382911     
+ Estimated remaining time in hh:mm:ss =  175 h 46 m 54 s
+ Estimated total run time in seconds =    717870.639337604     
+ Estimated total run time in hh:mm:ss =  199 h 24 m 30 s
+ We have done    11.84834     % of that
+ The run will finish approximately on (in local time): Tue Feb 08, 2022 01:25
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.352409090846777      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.350238204002380      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.349583812989295      
+  seconds
+ 
+ 
+ Total number of receivers saved is           22  out of           22
+ 
+ 
+ Writing the seismograms by master proc alone took   0.116451373323798      
+  seconds
+ 
+ 
+  Total number of time steps written:        10000
+ 
