@@ -1,2 +1,2 @@
- wrong doubling flag for inner core point in model_prem_iso()
+ gather operation failed for source
  Error detected, aborting MPI... proc            0

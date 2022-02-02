@@ -120,7 +120,7 @@
  
  logical, parameter :: ELLIPTICITY_VAL = .false.
  
- logical, parameter :: GRAVITY_VAL = .true.
+ logical, parameter :: GRAVITY_VAL = .false.
  
  logical, parameter :: FULL_GRAVITY_VAL = .false.
  

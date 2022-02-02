@@ -27,7 +27,7 @@
    no oceans
    no ellipticity
    no surface topography
-   incorporating self-gravitation (Cowling approximation)
+   no self-gravitation
    no rotation
    no attenuation
  
@@ -98,25 +98,25 @@
  
    ...creating mesh elements 
    creating layer            1 out of           10
-     10.0%    time: 12h 41min 39sec
+     10.0%    time: 14h 48min 00sec
    creating layer            2 out of           10
-     20.0%    time: 12h 41min 39sec
+     20.0%    time: 14h 48min 00sec
    creating layer            3 out of           10
-     30.0%    time: 12h 41min 39sec
+     30.0%    time: 14h 48min 00sec
    creating layer            4 out of           10
-     40.0%    time: 12h 41min 39sec
+     40.0%    time: 14h 48min 00sec
    creating layer            5 out of           10
-     50.0%    time: 12h 41min 39sec
+     50.0%    time: 14h 48min 00sec
    creating layer            6 out of           10
-     60.0%    time: 12h 41min 39sec
+     60.0%    time: 14h 48min 00sec
    creating layer            7 out of           10
-     70.0%    time: 12h 41min 39sec
+     70.0%    time: 14h 48min 00sec
    creating layer            8 out of           10
-     80.0%    time: 12h 41min 39sec
+     80.0%    time: 14h 48min 00sec
    creating layer            9 out of           10
-     90.0%    time: 12h 41min 39sec
+     90.0%    time: 14h 48min 00sec
    creating layer           10 out of           10
-    100.0%    time: 12h 41min 39sec
+    100.0%    time: 14h 48min 00sec
  
  
    ...creating global addressing
@@ -131,25 +131,25 @@
  
    ...creating mesh elements 
    creating layer            1 out of           10
-     10.0%    time: 12h 41min 45sec
+     10.0%    time: 14h 56min 46sec
    creating layer            2 out of           10
-     20.0%    time: 12h 41min 45sec
+     20.0%    time: 14h 56min 47sec
    creating layer            3 out of           10
-     30.0%    time: 12h 41min 45sec
+     30.0%    time: 14h 56min 47sec
    creating layer            4 out of           10
-     40.0%    time: 12h 41min 47sec
+     40.0%    time: 14h 56min 48sec
    creating layer            5 out of           10
-     50.0%    time: 12h 41min 51sec
+     50.0%    time: 14h 56min 51sec
    creating layer            6 out of           10
-     60.0%    time: 12h 41min 51sec
+     60.0%    time: 14h 56min 51sec
    creating layer            7 out of           10
-     70.0%    time: 12h 41min 51sec
+     70.0%    time: 14h 56min 52sec
    creating layer            8 out of           10
-     80.0%    time: 12h 41min 52sec
+     80.0%    time: 14h 56min 52sec
    creating layer            9 out of           10
-     90.0%    time: 12h 41min 53sec
+     90.0%    time: 14h 56min 53sec
    creating layer           10 out of           10
-    100.0%    time: 12h 41min 54sec
+    100.0%    time: 14h 56min 55sec
  
  
    ...precomputing jacobian
@@ -328,9 +328,9 @@
  
    ...creating mesh elements 
    creating layer            1 out of            2
-     50.0%    time: 12h 41min 58sec
+     50.0%    time: 15h 03min 55sec
    creating layer            2 out of            2
-    100.0%    time: 12h 41min 58sec
+    100.0%    time: 15h 03min 55sec
  
  
    ...creating global addressing
@@ -345,9 +345,9 @@
  
    ...creating mesh elements 
    creating layer            1 out of            2
-     50.0%    time: 12h 41min 59sec
+     50.0%    time: 15h 05min 01sec
    creating layer            2 out of            2
-    100.0%    time: 12h 41min 59sec
+    100.0%    time: 15h 05min 01sec
  
  
    ...precomputing jacobian
@@ -523,7 +523,7 @@
  
    ...creating mesh elements 
    creating layer            1 out of            1
-    100.0%    time: 12h 42min 01sec
+    100.0%    time: 15h 05min 56sec
  
    creating central cube
  
@@ -539,7 +539,7 @@
  
    ...creating mesh elements 
    creating layer            1 out of            1
-    100.0%    time: 12h 42min 01sec
+    100.0%    time: 15h 06min 44sec
  
    creating central cube
  
@@ -736,6 +736,6 @@
  
  
  Elapsed time for mesh generation and buffer creation in seconds = 
-   24.3144524777308     
+   1162.18249820825     
  End of mesh generation
  
